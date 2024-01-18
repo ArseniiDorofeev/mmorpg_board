@@ -1,0 +1,22 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Ваши отклики</h2>
+  {% if user_responses %}
+    <ul>
+      {% for response in user_responses %}
+        <li>
+          {{ response.text }}
+          <a href="{% url 'delete_response' response.id %}">Удалить</a>
+          {% if not response.accepted %}
+            <a href="{% url 'accept_response' response.id %}">Принять</a>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>У вас нет откликов.</p>
+  {% endif %}
+<a href="{% url 'profile' %}"><button>Вернуться в профиль</button></a>
+{% endblock %}
